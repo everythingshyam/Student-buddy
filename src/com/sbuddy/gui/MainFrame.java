@@ -30,8 +30,14 @@ public class MainFrame {
 	private JTextField emailField;
 	private JTextField contactField;
 	private JTextField addressField;
+//	private JTextField passwordField;
 	private JTextField statusField;
 	private static MainFrame window;
+	
+	private static int loginUID;
+	
+//	private JTextField emailField;
+	private JTextField passwordField;
 
 	/**
 	 * Launch the application.
@@ -78,6 +84,11 @@ public class MainFrame {
 			public void actionPerformed(ActionEvent e) {
 				//takes to LogIn Page
 				//code for that here, below
+				window.frame.setVisible(false);
+				//takes to Sign Up Page
+				frame.getContentPane().setLayout(null);
+				frame.setContentPane(getLoginContainer());
+				window.frame.setVisible(true);
 			}
 		});
 		loginBtn.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -90,7 +101,6 @@ public class MainFrame {
 				window.frame.setVisible(false);
 				//takes to Sign Up Page
 				frame.getContentPane().setLayout(null);
-//				SignUpPage sup=new SignUpPage();
 				frame.setContentPane(getSignUpContainer());
 				window.frame.setVisible(true);
 			}
@@ -112,6 +122,94 @@ public class MainFrame {
 		aboutField.setBounds(10, 10, 558, 152);
 		panel.add(aboutField);
 		aboutField.setColumns(10);
+		
+		return container;
+	}
+	
+	private Container getLoginContainer()
+	{
+		Container container=new Container();
+		container.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Student Buddy");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 36));
+		lblNewLabel.setBounds(259, 10, 283, 61);
+		container.add(lblNewLabel);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(145, 106, 528, 248);
+		container.add(panel);
+		panel.setLayout(null);
+		
+		JLabel emailLabel = new JLabel("E-Mail");
+		emailLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		emailLabel.setBounds(62, 36, 113, 25);
+		panel.add(emailLabel);
+		
+		JLabel passwordLabel = new JLabel("Password");
+		passwordLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		passwordLabel.setBounds(62, 94, 113, 25);
+		panel.add(passwordLabel);
+		
+		emailField = new JTextField();
+		emailField.setBounds(207, 36, 246, 19);
+		panel.add(emailField);
+		emailField.setColumns(10);
+		
+		passwordField = new JTextField();
+		passwordField.setColumns(10);
+		passwordField.setBounds(207, 94, 246, 19);
+		panel.add(passwordField);
+		
+		JButton loginBtn = new JButton("Log In");
+		loginBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String email=emailField.getText();
+				String password=passwordField.getText();
+				
+				int uid =CRUDRepository.getLoginUID(email,password);
+				if(uid>0)
+				{
+					loginUID=uid;
+					window.frame.setVisible(false);
+					//takes to Main Content Page
+					frame.getContentPane().setLayout(null);
+					frame.getContentPane().add(new JLabel("Login Successful"));
+//					frame.setContentPane(getMainContentContainer());
+					window.frame.setVisible(true);
+				}
+					
+			}
+		});
+		loginBtn.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		loginBtn.setBounds(329, 156, 85, 21);
+		panel.add(loginBtn);
+		
+		JButton clearBtn = new JButton("Clear");
+		clearBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				emailField.setText("");
+				passwordField.setText("");
+			}
+		});
+		clearBtn.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		clearBtn.setBounds(90, 156, 85, 21);
+		panel.add(clearBtn);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				window.frame.setVisible(false);
+				//takes to First Page
+				frame.getContentPane().setLayout(null);
+				frame.setContentPane(getMainContainer());
+				window.frame.setVisible(true);
+			}
+		});
+		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnBack.setBounds(10, 432, 85, 21);
+		container.add(btnBack);
 		
 		return container;
 	}

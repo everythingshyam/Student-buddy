@@ -129,4 +129,37 @@ Connection connection=DBConnection.getConnection();
 		}
 	}
 	
+	public static int getLoginUID(String email,String password)
+	{
+		Connection connection=DBConnection.getConnection();
+		int uid=0;
+		String sql="select uid from student where email_id=? and password=?";
+		try {
+			PreparedStatement pStatement=connection.prepareStatement(sql);
+			
+			pStatement.setString(1, email);
+			pStatement.setString(2, password);
+			
+			ResultSet resultSet= pStatement.executeQuery();
+			if(resultSet!=null)
+			{
+				uid=resultSet.getInt(1);
+				System.out.println("UID Matched: "+uid);
+				return uid;
+			}
+			else
+				return 0;
+			
+		} catch (SQLException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+			
+			
+			return 0;
+		}
+		
+	}
+	
 }
