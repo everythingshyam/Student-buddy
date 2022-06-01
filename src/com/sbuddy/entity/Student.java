@@ -6,22 +6,31 @@ public class Student {
 	private String email;
 	private String contact;
 	private String address;
+	private String password;
+	private int xCoordinate;
+	private int yCoordinate;
 	
-	public Student(int uID, String name, String email, String contact, String address) {
+	public Student(int uID, String name, String email, String contact, String address,String password,int xCoordinate, int yCoordinate) {
 		super();
 		UID = uID;
 		this.name = name;
 		this.email = email;
 		this.contact = contact;
 		this.address=address;
+		this.setPassword(password);
+		this.setxCoordinate(xCoordinate);
+		this.setyCoordinate(yCoordinate);
 	}
 
-	public Student(String name, String email, String contact,String address) {
+	public Student(String name, String email, String contact,String address,String password,int xCoordinate, int yCoordinate) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.contact = contact;
 		this.address = address;
+		this.setPassword(password);
+		this.setxCoordinate(xCoordinate);
+		this.setyCoordinate(yCoordinate);
 	}
 
 	public int getUID() {
@@ -64,6 +73,30 @@ public class Student {
 	public void setAddress(String address)
 	{
 		this.address=address;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getxCoordinate() {
+		return xCoordinate;
+	}
+
+	public void setxCoordinate(int xCoordinate) {
+		this.xCoordinate = xCoordinate;
+	}
+
+	public int getyCoordinate() {
+		return yCoordinate;
+	}
+
+	public void setyCoordinate(int yCoordinate) {
+		this.yCoordinate = yCoordinate;
 	}
 	
 	
